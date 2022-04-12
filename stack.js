@@ -1,3 +1,4 @@
+const LinkedList = require("./linked-list");
 /** Node: node for a stack. */
 
 class Node {
@@ -15,15 +16,19 @@ class Node {
 class Stack {
   top = null;
   size = 0;
+  _list = new LinkedList();
 
   /** push(val): add new value to the top of the stack. Returns undefined. */
 
   push(val) {
-    let newNode = new Node(val);
+    // let newNode = new Node(val);
 
-    newNode.next = this.top;
-    this.top = newNode;
-    this.size++;
+    // newNode.next = this.top;
+    // this.top = newNode;
+    // this.size++;
+    this._list.unshift(val);
+    this.top = this._list.head;
+    this.size += 1;
   }
 
   /** pop(): remove the node from the top of the stack
@@ -34,10 +39,14 @@ class Stack {
       throw new Error("Empty Stack");
     }
 
-    let topNode = this.top;
-    this.top = this.top.next;
-    this.size--;
-    return topNode.val;
+    // let topNode = this.top;
+    // this.top = this.top.next;
+    // this.size--;
+    // return topNode.val;
+    let value = this._list.shift();
+    this.top = this._list.head;
+    this.size -= 1;
+    return value;
   }
 
   /** peek(): return the value of the top node in the stack. */
