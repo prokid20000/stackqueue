@@ -21,9 +21,21 @@ function balancedBrackets(str) {
     if(openingBrackets.includes(char)){
       bracketStack.push(char);
     }
-    if(char === "]" && bracketStack.peek() === "["){
+    if(char === "]" && bracketStack.size !=0 && bracketStack.peek() === "["){
+      bracketStack.pop();
     }
+    if(char === ")" && bracketStack.size !=0 && bracketStack.peek() === "("){
+      bracketStack.pop();
+    }
+    if(char === "}" && bracketStack.size !=0 && bracketStack.peek() === "{"){
+      bracketStack.pop();
+    }
+
   }
+  if(bracketStack.size === 0){
+    return true;
+  }
+  return false;
 }
 
 function josephusSurvivor(peopleNum, skip) {
